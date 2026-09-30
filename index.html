@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>약속땃지ni</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#4a3b47;background:linear-gradient(160deg,#ffe3ef,#e6ddff 45%,#d6f0ff);overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg span{position:absolute;font-size:28px;opacity:.5;animation:fl 9s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-22px) rotate(12deg)}}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:20px 16px 60px}
+h1{text-align:center;margin:6px 0 0;font-size:30px;color:#d6478a}
+.sub{text-align:center;margin:4px 0 12px;font-size:14px}
+.card{background:rgba(255,255,255,.88);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 8px 24px rgba(180,120,180,.18)}
+.card h2{margin:0 0 10px;font-size:17px}
+label{display:block;font-size:13px;margin:8px 0 3px;font-weight:700}
+input,select{width:100%;padding:11px;border:2px solid #f3c9dd;border-radius:12px;font-size:15px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:8px 12px;border-radius:99px;border:2px solid #f3c9dd;background:#fff;font-size:14px;cursor:pointer;user-select:none}
+.chip.on{background:#ff8fbd;color:#fff;border-color:#ff8fbd}
+button{width:100%;padding:13px;border:0;border-radius:14px;background:linear-gradient(90deg,#ff8fbd,#b69cff);color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-top:12px}
+button.sm{width:auto;padding:10px 16px;margin:0}
+.steps{display:flex;justify-content:center;gap:6px;font-size:12px;margin-bottom:6px}
+.steps b{padding:4px 9px;border-radius:99px;background:#fff;opacity:.6}
+.steps b.on{background:#ff8fbd;color:#fff;opacity:1}
+.hide{display:none}
+.tl{border-left:4px dashed #ffb3d1;margin:8px 0 0 10px;padding-left:16px}
+.tl div{margin:0 0 14px;position:relative}
+.tl div:before{content:"";position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#ff8fbd}
+.tl small{color:#8a7a86}
+.tag{display:inline-block;background:#efe6ff;border-radius:8px;padding:2px 8px;font-size:12px;margin:2px 2px 0 0}
+.shrew{display:flex;align-items:flex-end;gap:10px}
+.bubble{flex:1;background:#fff;border:3px solid #ffb3d1;border-radius:18px;padding:12px;font-size:14px;position:relative;line-height:1.5}
+.meter{height:10px;background:#f1e3ec;border-radius:9px;overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb86b,#ff4d6d);transition:width .4s}
+#shrewSvg.mad{animation:sh .25s infinite}
+@keyframes sh{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.steam{display:none}.mad .steam{display:block}
+.brow{display:none}.mad .brow{display:block}
+.note{font-size:12px;color:#8a7a86;margin-top:8px}
+.back{width:auto;padding:6px 12px;margin:0 0 10px;background:#fff;color:#d6478a;border:2px solid #f3c9dd;font-size:13px;border-radius:99px}
+.back:hover{background:#ffeaf3}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+  <h1>약속땃지ni </h1>
+  <p class="sub">땃쥐가 약속 스케줄을 정해준다쮜&gt;&lt;</p>
+
+  <!-- 땃쥐 -->
+  <div class="card shrew">
+    <svg id="shrewSvg" width="120" height="110" viewBox="0 0 120 110">
+      <ellipse cx="60" cy="72" rx="38" ry="30" fill="#b9a3a0"/>
+      <ellipse cx="60" cy="80" rx="24" ry="18" fill="#efe1de"/>
+      <circle cx="30" cy="40" r="12" fill="#b9a3a0"/><circle cx="30" cy="40" r="6" fill="#ffb3c7"/>
+      <circle cx="80" cy="36" r="12" fill="#b9a3a0"/><circle cx="80" cy="36" r="6" fill="#ffb3c7"/>
+      <path d="M22 58 Q30 30 62 32 Q98 34 104 58 Q100 76 62 78 Q26 78 22 58Z" fill="#c9b4b0"/>
+      <path d="M96 52 L118 60 L96 68Z" fill="#c9b4b0"/><circle cx="117" cy="60" r="4.5" fill="#ff7aa8"/>
+      <circle cx="60" cy="52" r="5" fill="#2d2330"/><circle cx="80" cy="52" r="5" fill="#2d2330"/>
+      <circle cx="61.5" cy="50" r="1.6" fill="#fff"/><circle cx="81.5" cy="50" r="1.6" fill="#fff"/>
+      <g class="brow" stroke="#2d2330" stroke-width="3.5" stroke-linecap="round"><path d="M52 42 L68 48"/><path d="M90 42 L74 48"/></g>
+      <ellipse cx="46" cy="62" rx="5" ry="3" fill="#ffb3c7" opacity=".8"/>
+      <path d="M68 66 Q76 71 84 66" stroke="#7a4a5a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g class="steam" fill="#ff4d6d" font-size="18"><text x="10" y="22"> </text><text x="92" y="20"> </text></g>
+      <path d="M22 78 Q4 88 8 100" stroke="#b9a3a0" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="bubble" id="say">안녕이쮜! 나는 땃쥐다쮜. 어디서 놀지 빨리 입력하라쮜!</div>
+      <div class="meter"><i id="mad"></i></div>
+    </div>
+  </div>
+
+  <div class="steps" id="steps"><b class="on">1 위치·시간</b><b>2 취향</b><b>3 분석</b><b>4 추천</b></div>
+
+  <div style="text-align:right;margin-top:-4px"><button class="back" onclick="resetAll()"> 초기화</button></div>
+  <!-- STEP 1 -->
+  <div class="card" id="s1">
+    <h2>STEP 1. 위치 및 시간 입력</h2>
+    <div class="row">
+      <div><label>나의 출발 위치</label><input id="a" list="st" placeholder="예: 홍대입구"></div>
+      <div><label>친구의 출발 위치</label><input id="b" list="st" placeholder="예: 잠실"></div>
+    </div>
+    <datalist id="st"></datalist>
+    <label>놀 수 있는 여유 시간</label>
+    <select id="t"><option value="60">1시간</option><option value="120" selected>2시간</option><option value="180">3시간</option><option value="240">4시간 이상</option></select>
+    <div class="note">※ 데모 버전: 서울·수도권 주요 역 목록에서 골라주세요.</div>
+    <button onclick="go(2)">다음 →</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card hide" id="s2">
+    <button class="back" onclick="go(1)">← 돌아가기</button>
+    <h2>STEP 2. 취향 선택</h2>
+    <label>나의 취향 (여러 개 가능)</label><div class="chips" id="pa"></div>
+    <label>나의 MBTI</label><input id="ma" list="mb" maxlength="4" placeholder="예: ENFP">
+    <label>친구의 취향</label><div class="chips" id="pb"></div>
+    <label>친구의 MBTI</label><input id="mb2" list="mb" maxlength="4" placeholder="예: ISTJ">
+    <datalist id="mb"></datalist>
+    <button onclick="analyze()">땃쥐야 분석해줘 →</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card hide" id="s3">
+    <button class="back" onclick="go(2)">← 돌아가기</button>
+    <h2>STEP 3. AI 조건 분석 중...</h2>
+    <div id="an"></div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="card hide" id="s4">
+    <button class="back" onclick="go(3)">← 돌아가기</button>
+    <h2>STEP 4. 최적 장소 · 추천 코스</h2>
+    <div id="res"></div>
+    <label style="margin-top:14px">땃쥐에게 추가사항 · 불만 말하기 </label>
+    <div style="display:flex;gap:8px">
+      <input id="cm" placeholder="예: 너무 멀어... 다른 데 없어?">
+      <button class="sm" onclick="complain()">말하기</button>
+    </div>
+    <button id="ok" class="hide" onclick="fin()"> 이걸로 확정!</button>
+  </div>
+</div>
+
+<script>
+const S={강남:[37.4979,127.0276],홍대입구:[37.5572,126.9245],신촌:[37.5551,126.9368],건대입구:[37.5404,127.0692],잠실:[37.5133,127.1002],성수:[37.5445,127.0557],이태원:[37.5345,126.9946],서울역:[37.5547,126.9707],종로3가:[37.5704,126.9921],합정:[37.5496,126.9139],사당:[37.4765,126.9816],왕십리:[37.5613,127.0378],신림:[37.4843,126.9297],노원:[37.6552,127.0614],수유:[37.6381,127.0257],영등포:[37.5158,126.9075],여의도:[37.5219,126.9245],교대:[37.4934,127.0146],혜화:[37.5822,127.0018],광화문:[37.5709,126.9769],구로디지털단지:[37.4853,126.9015],판교:[37.3947,127.1112],수원:[37.2661,127.0001],인천:[37.4763,126.6164]};
+const TYPES=["활동적","맛집","카페","정적"];
+const IDEAS={
+ 활동적:["보드게임카페","방탈출 카페","볼링장·당구장","실내 클라이밍·스포츠","오락실·코인노래방"],
+ 맛집:["골목 맛집 탐방","줄 서는 인기 식당","분위기 좋은 파스타·이자카야","디저트 맛집"],
+ 카페:["감성 카페","루프탑·뷰 카페","테마 카페(만화·고양이 등)","브런치 카페"],
+ 정적:["전시회·미술관","독립서점 구경","공원·하천 산책","소품샵·팝업스토어 구경"]};
+const DUR={활동적:70,맛집:60,카페:50,정적:50};
+const ORDER=["활동적","정적","맛집","카페"];
+const $=id=>document.getElementById(id);
+let sel={pa:new Set(),pb:new Set()},cur=null,mad=0,fired=0;
+
+// 배경
+$("bg").innerHTML=Array.from({length:16},(_,i)=>`<span style="left:${(i*37)%97}%;top:${(i*53)%92}%;animation-delay:${i*.6}s">${[" "," "," "," "," "," "," "][i%7]}</span>`).join("");
+$("st").innerHTML=Object.keys(S).map(k=>`<option value="${k}">`).join("");
+$("mb").innerHTML=["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"].map(k=>`<option value="${k}">`).join("");
+["pa","pb"].forEach(id=>{$(id).innerHTML=TYPES.map(t=>`<span class="chip" data-t="${t}">${{활동적:" 활동적",맛집:" 맛집",카페:" 카페",정적:" 정적 활동"}[t]}</span>`).join("");
+ $(id).onclick=e=>{const t=e.target.dataset.t;if(!t)return;sel[id].has(t)?sel[id].delete(t):sel[id].add(t);e.target.classList.toggle("on")}});
+
+function say(m){$("say").textContent=m}
+function go(n){
+ if(n==2){
+  if(!S[$("a").value.trim()]||!S[$("b").value.trim()]){say("위치를 목록에서 골라달라쮜! 땃쥐 바쁘다쮜!");return}
+  say("좋아쮜. 이제 취향이랑 MBTI 적으라쮜~");
+ }
+ [1,2,3,4].forEach(i=>{$("s"+i).classList.toggle("hide",i!=n)});
+ [...$("steps").children].forEach((b,i)=>b.classList.toggle("on",i==n-1));
+ scrollTo({top:0,behavior:"smooth"});
+}
+const dist=(p,q)=>{const R=6371,r=x=>x*Math.PI/180,dl=r(q[0]-p[0]),dn=r(q[1]-p[1]);const h=Math.sin(dl/2)**2+Math.cos(r(p[0]))*Math.cos(r(q[0]))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+const mins=km=>Math.round(km*2.6+12); // 대략적인 대중교통 추정
+
+function analyze(){
+ const ma=$("ma").value.toUpperCase().trim(),mb=$("mb2").value.toUpperCase().trim();
+ if(!/^[EI][NS][TF][JP]$/.test(ma)||!/^[EI][NS][TF][JP]$/.test(mb)){say("MBTI는 ENFP처럼 4글자로 적으라쮜!!");return}
+ if(!sel.pa.size||!sel.pb.size){say("취향도 하나씩은 골라라쮜!");return}
+ go(3);say("땃쥐가 머리 굴리는 중이다쮜...");
+ const A=S[$("a").value.trim()],B=S[$("b").value.trim()],T=+$("t").value;
+ const mid=[(A[0]+B[0])/2,(A[1]+B[1])/2];
+ let best=null,bd=1e9;for(const k in S){const d=dist(mid,S[k]);if(d<bd){bd=d;best=k}}
+ const ta=mins(dist(A,S[best])),tb=mins(dist(B,S[best]));
+ const inter=[...sel.pa].filter(x=>sel.pb.has(x));
+ const types=inter.length?inter:[...new Set([...sel.pa,...sel.pb])];
+ const E=(ma[0]=="E")+(mb[0]=="E"),J=(ma[3]=="J")+(mb[3]=="J"),N=(ma[1]=="N")+(mb[1]=="N");
+ const mood=E==2?"둘 다 외향! 활기차고 핫플 위주로 ":E==0?"둘 다 내향! 조용하고 아늑한 곳 위주로 ":"E와 I의 조화! 활동 1 + 휴식 1 밸런스로 ";
+ const plan=J==2?"둘 다 J형: 시간표대로 촘촘한 코스":J==0?"둘 다 P형: 여유 있게 즉흥 가능한 코스":"J/P 혼합: 큰 틀만 정하고 유연하게";
+ const fresh=N>=1?"N 성향이 있어 이색·테마 장소 가산점":"S 성향 중심이라 검증된 무난한 장소 가산점";
+ cur={best,ta,tb,T,types,ma,mb,E,N,J,seed:0};
+ $("an").innerHTML=`<p> 두 사람의 중간 지점 → <b>${best}역</b> 근처</p><p> 나 약 ${ta}분 / 친구 약 ${tb}분 (추정)</p><p> 취향 ${inter.length?"교집합":"합집합(겹치는 게 없어서)"}: ${types.map(t=>`<span class="tag">${t}</span>`).join("")}</p><p> MBTI 분석: <span class="tag">${ma}</span> × <span class="tag">${mb}</span><br>· ${mood}<br>· ${plan}<br>· ${fresh}</p><button onclick="recommend()">코스 추천 받기 →</button>`;
+ setTimeout(()=>say("분석 끝났다쮜. 밑에 버튼 누르라쮜!"),600);
+}
+
+function recommend(){
+ const c=cur;let n=c.T<=60?1:c.T<=120?2:c.T<=180?3:4;
+ let list=[...c.types].sort((x,y)=>ORDER.indexOf(x)-ORDER.indexOf(y));
+ if(c.E==0)list=list.sort((x,y)=>(x=="활동적")-(y=="활동적")); // 둘 다 I면 활동적은 뒤로
+ const extra=["카페","정적","맛집","활동적"];
+ while(list.length<n&&extra.length){const e=extra.shift();if(!list.includes(e))list.push(e)}
+ list=list.slice(0,n);
+ let t=0,html="";
+ const startLabel=(m)=>m<60?`${m}분`:`${Math.floor(m/60)}시간${m%60?" "+m%60+"분":""}`;
+ list.forEach((k,i)=>{
+  const pool=IDEAS[k],idea=pool[(c.seed+i+(c.N*2)+c.ma.charCodeAt(0))%pool.length];
+  const d=c.J==2?DUR[k]-10:c.J==0?DUR[k]+10:DUR[k];
+  html+=`<div><b>${i+1}. ${c.best}역 근처 · ${idea}</b><br><small>${startLabel(t)} 후부터 약 ${d}분 · <span class="tag">${k}</span></small></div>`;t+=d+(i<list.length-1?10:0);
+ });
+ html=`<p> 만남 장소: <b>${c.best}역</b> (이동 동선 최소화: 나 ${c.ta}분 / 친구 ${c.tb}분)</p><div class="tl">${html}</div><p class="note">총 소요 약 ${startLabel(t)} / 여유 시간 ${startLabel(c.T)}<br>※ 장소는 카테고리 추천이에요. 지도앱에서 "${c.best}역 + 키워드"로 검색해서 영업시간을 확인하세요!</p>`;
+ $("res").innerHTML=html;go(4);
+ say("이 코스면 충분하다쮜. 불만 있으면 말해보라쮜... 근데 각오하라쮜.");
+}
+
+const R1=["아 또 뭐가 불만이쮜...? 나도 야근하고 왔다쮜.","벌써 바꿔달라고? 이 인간아, 나도 퇴근하고 싶다쮜!","하... 어제도 이런 손님 있었다쮜. 제발 좀 정하라쮜.","진짜 짜증나게 하네쮜! 이것보다 좋은 데 없다쮜!"];
+const R2=["야!! 내 월급 안 오른 지가 언젠데 너희 데이트까지 고민해야 하냐쮜!!","아니 그냥 가라쮜!! 밥은 어디서든 맛있다쮜!!","계속 그러면 진짜 땃쥐 화난다쮜 결정해라쮜!!","친구가 기다리다 지쳐서 집 간다쮜! 빨리 정하라쮜!!"];
+function complain(){
+ const v=$("cm").value.trim();if(!v){say("말을 하라쮜! 빈칸으로 불평하지 말라쮜!");return}
+ $("cm").value="";mad=Math.min(100,mad+22);$("mad").style.width=mad+"%";
+ $("shrewSvg").classList.toggle("mad",mad>=44);
+ cur.seed++;
+ const pool=mad<44?R1:R2;
+ say(pool[Math.floor(Math.random()*pool.length)]+(mad<100?" 그래도 코스 다시 짜줬다쮜.":" 이제 안 바꿔준다쮜!!"));
+ if(mad<100){recommend();say(pool[Math.floor(Math.random()*pool.length)]+" (코스 다시 짰다쮜)")}
+ if(mad>=66)$("ok").classList.remove("hide");
+ if(mad>=100){$("cm").disabled=true;$("ok").classList.remove("hide");say("더 이상 안 받는다쮜!!! 이걸로 확정하라쮜!!! ")}
+}
+function fin(){
+ $("shrewSvg").classList.remove("mad");
+ say("진작 그럴 것이지쮜~ 잘 놀다 오라쮜! ");
+ $("ok").textContent=" 약속 확정 완료!";$("ok").disabled=true;
+}
+function resetAll(){
+ ["a","b","ma","mb2","cm"].forEach(i=>$(i).value="");
+ $("t").value="120";$("cm").disabled=false;
+ sel.pa.clear();sel.pb.clear();
+ document.querySelectorAll(".chip.on").forEach(c=>c.classList.remove("on"));
+ mad=0;$("mad").style.width="0";$("shrewSvg").classList.remove("mad");
+ const ok=$("ok");ok.classList.add("hide");ok.disabled=false;ok.textContent=" 이걸로 확정!";
+ $("an").innerHTML="";$("res").innerHTML="";cur=null;
+ if(typeof ov!=="undefined"){ov.forEach(o=>o.setMap(null));ov=[]}
+ go(1);say("싹 다 지웠다쮜! 처음부터 다시 해보라쮜~ ");
+}
+</script>
+</body>
+</html>
